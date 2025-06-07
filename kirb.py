@@ -3,7 +3,7 @@ import pygame
 kirby = pygame.transform.scale(pygame.image.load("Kirby_Standing.png"), (100,90))
 k_hitbox = kirby.get_rect()
 kirby_fly = pygame.transform.scale(pygame.image.load("kirbyflight.png"), (100,90))
-kirby_inhale_1 = pygame.transform.scale(pygame.image.load("kirbyinhale1.png"), (100,90))
+kirby_inhale_1 = pygame.transform.scale(pygame.image.load("kirbyinhale1 (2).png"), (100,90))
 kirby_inhale_2 = pygame.transform.scale(pygame.image.load("kirbyinhale2.png"), (100,90))
 kirby_frame = kirby
 inhale_start = pygame.mixer.Sound("inhaleStart.wav")
