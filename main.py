@@ -95,7 +95,9 @@ while running:
 
     
     for event in pygame.event.get():
-        if score >= 200:
+        if KIRBY.score >= 200:
+            running = False
+        if KIRBY.score <0:
             running = False
         if event.type == pygame.QUIT:
             running = False

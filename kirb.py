@@ -3,8 +3,9 @@ import pygame
 kirby = pygame.transform.scale(pygame.image.load("Kirby_Standing.png"), (100,90))
 k_hitbox = kirby.get_rect()
 kirby_fly = pygame.transform.scale(pygame.image.load("kirbyflight.png"), (100,90))
-kirby_inhale_1 = pygame.transform.scale(pygame.image.load("kirbyinhale1 (2).png"), (100,90))
+kirby_inhale_1 = pygame.transform.scale(pygame.image.load("kirbyinhale1.png"), (100,90))
 kirby_inhale_2 = pygame.transform.scale(pygame.image.load("kirbyinhale2.png"), (100,90))
+vacuum = pygame.rect.Rect(0,0,300,110)
 kirby_frame = kirby
 inhale_start = pygame.mixer.Sound("inhaleStart.wav")
 inhale_continue = pygame.mixer.Sound("inhaleContinue.wav")
@@ -31,13 +32,24 @@ class Kirb:
         self.score = 0
         self.inhale_time = 0
         self.frame = self.image["idle"]
+        self.munch_space = vacuum
     def moving(self):
         keys_pressed = pygame.key.get_pressed()
         
         if keys_pressed[pygame.K_SPACE] and self.grounded:
+           
             self.inhale = True
             self.dx = 0
             self.y = (height//2-1)
+            if self.inhale and self.frame == self.image["inhale2"]:
+                if keys_pressed[pygame.K_a]:
+                    self.facing_left = True
+                print(self.facing_left)
+                if self.facing_left:
+                    self.munch_space.x = self.x+70
+                else:
+                    self.munch_space.x = self.x-330 
+                self.munch_space.y = self.y-100
         else:
             self.inhale = False
         if keys_pressed[pygame.K_a] and not self.inhale:
@@ -102,3 +114,4 @@ class Kirb:
         self.moving()
         self.animation()
         screen.blit(self.frame,self.hitbox)
+        pygame.draw.rect(screen, (0,0,0), self.munch_space)
